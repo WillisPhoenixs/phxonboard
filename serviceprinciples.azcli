@@ -1,0 +1,5 @@
+$Customer="willistest"
+$spname="$Customer-Lighthouse-Reader"
+
+$reader=(az ad sp create-for-rbac --name $SPNAME --role Reader --query "appId")
+$Contributor=(az ad sp create-for-rbac --name $SPNAME --role Contributor --query "appId")
