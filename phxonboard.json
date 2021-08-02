@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "description"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+        "name": "resourceGroup",
+        "type": "Microsoft.Resources/[Parameters('resourcegroup')]",
+        "apiVersion": "2019-10-01",
+        "location": "uksouth",
+        "dependsOn": [],
+        "tags": {
+        }
+    },
+    {
+        "name": "az-phx-automation",
+        "type": "Microsoft.Automation/automationAccounts",
+        "apiVersion": "2015-10-31",
+        "location": "[resourceGroup().location]",
+        "resourceGroup": "[parameters('resourceGroup')]",
+        "tags": {
+        },
+        "properties": {
+            "sku": {
+                "name": "Free"
+            }
+        }
+    },
+    {
+        "name": "az-phx-loganalytics",
+        "type": "Microsoft.OperationalInsights/workspaces",
+        "apiVersion": "2015-11-01-preview",
+        "location": "[resourceGroup().location]",
+        "resourceGroup": "[parameters('resourceGroup')]",
+        "properties": {
+            "sku": {
+                "name": "Free"
+            },
+            "features": {
+                "searchVersion": 1
+            }
+        }
+    },
+    {}],
+    "outputs": {}
+}}
