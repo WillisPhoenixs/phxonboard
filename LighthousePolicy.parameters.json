@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "managedByName": {
+            "value": "Phoenixs Software"
+        },
+        "managedByDescription": {
+            "value": "Phoenixs Software Azure Managed Services"
+        },
+        "managedByTenantId": {
+            "value": "2ec57e94-f52a-4588-b969-f463bf4ddcfc"
+        },
+        "managedByAuthorizations": {
+            "value": [
+                {
+                    "principalId": "$ServicePrincipal",
+                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+                    "principalIdDisplayName": " Azure-MSC-$customername-Reader"
+                },
+                {
+                    "principalId": "$ServicePrincipal",
+                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                    "principalIdDisplayName": "Azure-MSC-$customername-Contributor",
+                    "delegatedRoleDefinitionIds": [
+                        "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                        "92aaf0da-9dab-42b6-94a3-d43ce8d16293",
+                        "91c1777a-f3dc-4fae-b103-61d183457e46"
+                    ]
+                }                
+            ]
+        }
+    }
+}
