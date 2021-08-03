@@ -1,0 +1,13 @@
+$AATemplatein = "File In"
+$AATemplateout = "File Out"
+
+$subscription_id = (Get-AzContext).Subscription.id
+(Get-Content -Path $AATemplatein) -Replace 'SUBSCRIPTION_ID', "$subscription_id" | Set-Content -Path $AATemplateout
+
+$alert_id=(az monitor activity-log alert list --query "[?contains(name, 'Security Recommendation')].{id:id}" -o tsv)
+foreach ($alert_id in $alert_id) {
+    Write-Output "Deleting $alert_id"
+    az monitor activity-log alert delete --id $alert_id
+}
+
+az monitor activity-log alert list -o table

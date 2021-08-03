@@ -1,0 +1,475 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "actiongroups_Phoenixs": {
+            "defaultValue": "PHAlerts",
+            "type": "String"
+        },
+        "ActiongroupID": {
+            "defaultValue": "/subscriptions/subscription_id/resourceGroups/az-phoenix-onboard/providers/microsoft.insights/actiongroups/PHAlerts",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Create Network Security Group",
+            "location": "Global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Network/networkSecurityGroups/write"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Create or Update Network Security Group events gives insight into network access changes and may reduce the time it takes to detect suspicious activity."
+            }
+            
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Delete Network Security Group",
+            "location": "Global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Network/networkSecurityGroups/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Deletion of Network Security Group events gives insight into network access changes and may reduce the time it takes to detect suspicious activity."
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Create Network Security Group Rule",
+            "location": "Global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Network/networkSecurityGroups/write"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Creation of Network Security Group Rules events gives insight into network access changes and may reduce the time it takes to detect suspicious activity."
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Delete Network Security Group Rule",
+            "location": "Global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Network/networkSecurityGroups/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Deletion of Network Security Group Rules events gives insight into network access changes and may reduce the time it takes to detect suspicious activity."
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Create Policy Assignment",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Authorization/policyAssignments/write"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Create Policy Assignment events gives insight into network access changes and may reduce the time it takes to detect suspicious activity."
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Delete Policy Assignment",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Authorization/policyAssignments/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Delete Policy Assignment events gives insight into network access changes and may reduce the time it takes to detect suspicious activity."
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Create, Update Firewall Rule",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.sql/servers/firewallRules/write"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Create, Update SQL Firewall Rules events gives insight into network access changes and may reduce the time it takes to detect suspicious activity." 
+            }
+        },
+                {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert Delete Firewall Rule",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.sql/servers/firewallRules/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Delete SQL Firewall Rules events gives insight into network access changes and may reduce the time it takes to detect suspicious activity." 
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert for Create or Update Security Solution",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Security/securitySolutions/write"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Create or Update Security Solution events gives insight into network access changes and may reduce the time it takes to detect suspicious activity." 
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "Security Recommendation - Activity Log Alert for Delete Security Solution",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Security/securitySolutions/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Delete Security Solution events gives insight into network access changes and may reduce the time it takes to detect suspicious activity." 
+            }
+        },
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "location": "global",
+            "name": "Security Recommendation - Activity Log Alert for Create or Update Security Policy",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', parameters('actiongroups_Phoenixs'))]"
+            ],
+            "properties": {
+                "scopes": [
+                    "/subscriptions/subscription_id"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Security/policies/write"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('ActiongroupID')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "PHX - Monitoring for Create or Update Network Security Policy events gives insight into network access changes and may reduce the time it takes to detect suspicious activity"
+            }
+        },
+        {
+                "type": "Microsoft.Insights/actionGroups",
+                "apiVersion": "2019-03-01",
+                "name": "[parameters('actiongroups_Phoenixs')]",
+                "location": "Global",
+                "properties": {
+                "groupShortName": "[parameters('actiongroups_Phoenixs')]",
+                "enabled": true,
+                    "emailReceivers": [
+                        {
+                            "name": "PHX-ServiceDesk",
+                            "emailAddress": "servicedesk@phoenixs.co.uk",
+                            "useCommonAlertSchema": true
+                        }
+                        ]
+                }
+        }
+    ]
+}
