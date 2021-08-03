@@ -1,5 +1,7 @@
-$Customer="willistest"
-$spname="$Customer-Lighthouse-Reader"
+$CUSTOMER="willistest"
 
-$reader=(az ad sp create-for-rbac --name $SPNAME --role Reader --query "appId")
-$Contributor=(az ad sp create-for-rbac --name $SPNAME --role Contributor --query "appId")
+$readersp=(az ad sp create-for-rbac --name $Customer-Lighthouse-Reader --role Reader --query "appId")
+$Contributorsp=(az ad sp create-for-rbac --name $Customer-Lighthouse-Contributor --role Contributor --query "appId")
+
+$Readerad=(az ad group create --display-name Azure-MSC-$CUSTOMER-Reader --description Reader account group for Azure Lighthouse --query ObjectID)
+$Contributorad=(az ad group create --display-name Azure-MSC-$CUSTOMER-Contributor --description Contributor account group for Azure Lighthouse --query ObjectID)

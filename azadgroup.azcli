@@ -1,0 +1,4 @@
+$CUSTOMER="Customer Name"
+
+$Reader=(az ad group create --display-name Azure-MSC-$CUSTOMER-Reader --description Reader account group for Azure Lighthouse --query ObjectID)
+$Contributor=(az ad group create --display-name Azure-MSC-$CUSTOMER-Contributor --description Contributor account group for Azure Lighthouse --query ObjectID)
